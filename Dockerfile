@@ -14,6 +14,9 @@ ARG CHROME_BIN=/usr/bin/chromium-browser
 RUN if [ "$RUN_TESTS" = true ] ; then \
     apk --no-cache add chromium ; fi
 
+RUN npm run postinstall
+RUN $(npm bin)/ng version
+
 COPY . .
 RUN if [ "$RUN_TESTS" = true ] ; then \
     npm run lint &&\
