@@ -4,7 +4,7 @@
 # >> docker build -f docker/pipeline/Dockerfile -t aam/digital:latest .
 # >> docker run -p=80:80 -t aam/digital:latest aam-digital
 # >> docker kill aam-digital
-FROM node:15.1.0-alpine3.12
+FROM node:15.1.0-alpine3.12 as builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --no-progress
@@ -21,3 +21,9 @@ RUN if [ "$RUN_TESTS" = true ] ; then \
 
 CMD npm test-ci
 CMD npm build
+
+FROM nginx:1.19.4-alpine
+ENV PORT=80
+COPY --from=builder /app/dist/ /usr/share/nginx/html
+CMD ls /usr/share/nginx/html
+
