@@ -9,15 +9,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --no-progress
 RUN $(npm bin)/ng version
-#ARG RUN_TESTS=false
-#ARG CHROME_BIN=/usr/bin/chromium-browser
-#RUN if [ "$RUN_TESTS" = true ] ; then \
-#    apk --no-cache add chromium ; fi
+ARG RUN_TESTS=false
+ARG CHROME_BIN=/usr/bin/chromium-browser
+RUN if [ "$RUN_TESTS" = true ] ; then \
+    apk --no-cache add chromium ; fi
 
 COPY . .
-#RUN if [ "$RUN_TESTS" = true ] ; then \
-#    npm run lint &&\
-#    npm run test-ci ; fi
+RUN if [ "$RUN_TESTS" = true ] ; then \
+    npm run lint &&\
+    npm run test-ci ; fi
 
 CMD npm test-ci
 CMD npm build
