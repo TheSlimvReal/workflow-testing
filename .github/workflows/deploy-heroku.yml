@@ -19,8 +19,6 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      - name: Dispaly cache
-        run: ls -a /tmp/.buildx-cache
       - name: Build dev image and save it locally
         uses: docker/build-push-action@v2
         with:
