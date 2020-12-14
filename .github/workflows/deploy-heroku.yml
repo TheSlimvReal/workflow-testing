@@ -25,6 +25,7 @@ jobs:
           context: ./
           builder: ${{ steps.buildx.outputs.name }}
           tags: test/deploy:latest
+          target: builder
           build-args: RUN_TESTS=${{ true }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
