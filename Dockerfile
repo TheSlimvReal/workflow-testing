@@ -20,7 +20,10 @@ RUN if [ "$RUN_TESTS" = true ] ; then \
     npm run test-ci ; fi
 
 CMD npm test-ci
-CMD npm build
+RUN $(npm bin)/ng version
+RUN $(npm bin)/ng build --prod
+CMD ls -a
+
 
 FROM nginx:1.19.4-alpine
 ENV PORT=80
