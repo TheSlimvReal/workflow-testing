@@ -9,7 +9,7 @@
     "test-ci": "ng test --karmaConfig=karma-ci.conf.js ",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ngcc && node patch-webpack.js"
+    "postinstall": "node patch-webpack.js"
   },
   "private": true,
   "dependencies": {
